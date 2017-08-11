@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import logo from '../images/gridironyard_logo.png';
 import background from '../images/field.png';
 import { Grid, Menu, Segment } from 'semantic-ui-react';
@@ -23,6 +24,7 @@ class App extends Component {
 
   render() {
     const {activeItem, leagueId, teamId } = this.state;
+    const user = this.props.loggedInUser;
     return (
       <div className="App">
         <div className="App-header" style={{background: ` no-repeat top/cover url(${background})` }}>
@@ -31,6 +33,10 @@ class App extends Component {
           <Menu attached='top' tabular color='green'>
             <Menu.Item as={Link} to={`/${leagueId}`} name='league' active={activeItem === 'league'} onClick={this.handleItemClick} />
             <Menu.Item as={Link} to={`/${teamId}/team/${teamId}`} name='team' active={activeItem === 'team'} onClick={this.handleItemClick}   />
+            <Menu.Menu position='right'>
+              <Menu.Item>{user.username}</Menu.Item>
+              <Menu.Item>Logout</Menu.Item>
+            </Menu.Menu>
           </Menu>
 
           <Segment>
@@ -43,4 +49,8 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+
+}
+
+export default connect(({loggedInUser}) => ({loggedInUser}))(App);

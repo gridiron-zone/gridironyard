@@ -1,4 +1,4 @@
-export default data = {
+const data = {
   players: [
     {
       name: 'Derek Carr',
@@ -114,3 +114,4 @@ export default data = {
     }
   ]
 };
+export default data;

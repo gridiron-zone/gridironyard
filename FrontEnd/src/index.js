@@ -7,19 +7,31 @@ import 'semantic-ui-css/semantic.min.css';
 import App from './components/App';
 import League from './components/League';
 import Team from './components/Team';
+import Players from './containers/Players';
+// import for store creation
+import reducer from './reducers/reducers';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(
-  <BrowserRouter>
-    <App>
-      <Switch>
-        <Route path='/:leagueId/team/:teamId' component={Team} />
-        <Route path='/:leagueId' component={League} />
-        <Route exact path='/' component={League} />
-      </Switch>
-    </App>
-  </BrowserRouter>
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
+ReactDOM.render(
+  <Provider store={store} >
+    <BrowserRouter>
+      <App>
+        <Switch>
+          <Route path='/:leagueId/players' component={Players} />
+          <Route path='/:leagueId/team/:teamId' component={Team} />
+          <Route path='/:leagueId' component={League} />
+          <Route exact path='/' component={League} />
+        </Switch>
+      </App>
+    </BrowserRouter>
+  </Provider>
   , document.getElementById('root'));
 registerServiceWorker();
