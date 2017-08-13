@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import logo from '../images/gridironyard_logo.png';
 import background from '../images/field.png';
-import { Grid, Menu, Segment } from 'semantic-ui-react';
+import { Menu, Segment } from 'semantic-ui-react';
 import '../styles/App.css';
 
 class App extends Component {
@@ -11,16 +11,12 @@ class App extends Component {
     super();
     this.state = {
       activeItem: 'league',
-      menuItems: {
-        league: ['scoreboard', 'leaderboard', 'messages'],
-        team: ['lineup', 'players']
-      },
       leagueId: 1,
       teamId: 1
     }
   }
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   render() {
     const {activeItem, leagueId, teamId } = this.state;
@@ -33,6 +29,7 @@ class App extends Component {
           <Menu attached='top' tabular color='green'>
             <Menu.Item as={Link} to={`/${leagueId}`} name='league' active={activeItem === 'league'} onClick={this.handleItemClick} />
             <Menu.Item as={Link} to={`/${teamId}/team/${teamId}`} name='team' active={activeItem === 'team'} onClick={this.handleItemClick}   />
+            <Menu.Item as={Link} to={`/${teamId}/players`} name='players' active={activeItem === 'players'} onClick={this.handleItemClick}   />
             <Menu.Menu position='right'>
               <Menu.Item>{user.username}</Menu.Item>
               <Menu.Item>Logout</Menu.Item>
@@ -49,8 +46,5 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-
-}
 
 export default connect(({loggedInUser}) => ({loggedInUser}))(App);

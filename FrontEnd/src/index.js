@@ -10,8 +10,8 @@ import Team from './components/Team';
 import Players from './containers/Players';
 // import for store creation
 import reducer from './reducers/reducers';
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
 import registerServiceWorker from './registerServiceWorker';
 
@@ -25,9 +25,9 @@ ReactDOM.render(
     <BrowserRouter>
       <App>
         <Switch>
-          <Route path='/:leagueId/players' component={Players} />
-          <Route path='/:leagueId/team/:teamId' component={Team} />
-          <Route path='/:leagueId' component={League} />
+          <Route exact path='/:leagueId/team/:teamId' component={Team} />
+          <Route exact path='/:leagueId/players' component={Players} />
+          <Route exact path='/:leagueId' component={League} />
           <Route exact path='/' component={League} />
         </Switch>
       </App>

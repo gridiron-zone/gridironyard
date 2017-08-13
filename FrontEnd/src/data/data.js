@@ -114,4 +114,16 @@ const data = {
     }
   ]
 };
+export const positionList = ['QB','RB','WR','TE','FLEX','DEF','K'];
+export const positionsObj = [
+  { key: 'all', value: 'ALL', text: 'Show All'},
+  { key: 'qb', value: 'QB', text:'Quarterback'},
+  { key: 'rb', value: 'RB', text:'Running Back'},
+  { key: 'wr', value: 'WR', text:'Wide Receiver'},
+  { key: 'te', value: 'TE', text:'Tight End'},
+  { key: 'flex', value: 'FLEX', text:'FLEX:(RB, WR, TE)'},
+  { key: 'def', value: 'DEF', text:'Team Defense'},
+  { key: 'k', value: 'K', text:'Kicker'}
+]
+
 export default data;
