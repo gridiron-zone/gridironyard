@@ -1,7 +1,7 @@
+import R from 'ramda';
 // grab our fake data
 import data from '../data/data';
 // action import
-
 
 const initialState = {
   players: data.players,
@@ -9,7 +9,8 @@ const initialState = {
   currentView: 'league',
   currentSubView: 'scoreboard',
   currentPlayerFilter: 'ALL',
-  
+  sortPlayersBy: 'rank',
+  sortAscending: true,
 }
 
 const reducer = function(state = initialState, action) {
@@ -20,10 +21,14 @@ const reducer = function(state = initialState, action) {
           currentPlayerFilter: action.payload
       }
     case 'SORT_PLAYERS':
+      console.log(action);
+      const sortPlayers = R.sortBy(R.propOr('', action.sortPlayersBy));
+      const sorted = sortPlayers(state.players);
       return {
         ...state,
-        sortPlayersBy,
-        sortDirection
+        players: action.sortAscending ? sorted : sorted.reverse(),
+        sortPlayersBy: action.sortPlayersBy,
+        sortAscending: action.sortAscending
       }
     case 'CHANGE_VIEW':
       return {

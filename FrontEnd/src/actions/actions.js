@@ -5,11 +5,11 @@ export function filterPlayers(filter) {
   }
 }
 
-export function sortPlayers(sortBy) {
+export function sortPlayers(sortPlayersBy, sortAscending) {
   return {
     type: 'SORT_PLAYERS',
     sortPlayersBy,
-    sortDirection
+    sortAscending
   }
 }
 
