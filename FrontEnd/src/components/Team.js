@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Menu, Segment } from 'semantic-ui-react';
+import { Menu, Container } from 'semantic-ui-react';
 import Matchup from '../containers/Matchup';
 import Roster from '../containers/Roster';
 
 const subviewComponents = {
-  roster: Roster,
-  matchup: Matchup
+  roster: <Roster />,
+  matchup: <Matchup />
 }
 
 class Team extends Component {
@@ -23,15 +23,15 @@ class Team extends Component {
     const {activeItem} = this.state;
     const Subview = subviewComponents[activeItem];
     return (
-      <div style={{backgroundColor:'yellow'}}>
+      <div style={{backgroundColor: 'white'}}>
         <Menu attached='top' secondary>
           <Menu.Item name='roster' active={activeItem === 'roster'} onClick={this.handleItemClick}  />
           <Menu.Item name='matchup' active={activeItem === 'matchup'} onClick={this.handleItemClick}  />
         </Menu>
-        <Segment>
-          <Subview />
-        </Segment>
-        </div>
+        <Container>
+          {Subview}
+        </Container>
+      </div>
     );
   }
 }

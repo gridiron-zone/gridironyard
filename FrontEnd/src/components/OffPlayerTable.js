@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table } from 'semantic-ui-react';
+import {offStatCategories} from '../data/data';
 
 export default class OffPlayerTable extends React.Component {
   render() {
@@ -8,39 +9,18 @@ export default class OffPlayerTable extends React.Component {
       <Table celled singleLine sortable inverted size='small'>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell onClick={event => onClick('position')}>Position</Table.HeaderCell>
-            <Table.HeaderCell onClick={event => onClick('name')}>Name</Table.HeaderCell>
-            <Table.HeaderCell onClick={event => onClick('team')}>Team</Table.HeaderCell>
-            <Table.HeaderCell onClick={event => onClick('owner')}>Owner</Table.HeaderCell>
-            <Table.HeaderCell onClick={event => onClick('passYds')}>PassYd</Table.HeaderCell>
-            <Table.HeaderCell onClick={event => onClick('passTDs')}>PassTD</Table.HeaderCell>
-            <Table.HeaderCell onClick={event => onClick('passInt')}>PassINT</Table.HeaderCell>
-            <Table.HeaderCell onClick={event => onClick('recs')}>Recs</Table.HeaderCell>
-            <Table.HeaderCell onClick={event => onClick('recYds')}>RecYds</Table.HeaderCell>
-            <Table.HeaderCell onClick={event => onClick('recTDs')}>RecTDs</Table.HeaderCell>
-            <Table.HeaderCell onClick={event => onClick('ruYds')}>RushYds</Table.HeaderCell>
-            <Table.HeaderCell onClick={event => onClick('ruTds')}>RushTDs</Table.HeaderCell>
-            <Table.HeaderCell onClick={event => onClick('retYds')}>RetYds</Table.HeaderCell>
-            <Table.HeaderCell onClick={event => onClick('retTds')}>RetTDs</Table.HeaderCell>
+            {offStatCategories.map((stat, index) => (
+              <Table.HeaderCell key={index} onClick={() => onClick(stat)}>{stat}</Table.HeaderCell>
+            ))}
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {players.map((player, index) => (
             <Table.Row key={index}>
-              <Table.Cell>{player.position}</Table.Cell>
-              <Table.Cell>#{player.jersey_number}&nbsp;{player.name}</Table.Cell>
-              <Table.Cell>{player.team}</Table.Cell>
-              <Table.Cell>{player.owner || 'FA'}</Table.Cell>
-              <Table.Cell>{player.passYds || '0'}</Table.Cell>
-              <Table.Cell>{player.passTDs || '0'}</Table.Cell>
-              <Table.Cell>{player.passInt || '0'}</Table.Cell>
-              <Table.Cell>{player.recs || '0'}</Table.Cell>
-              <Table.Cell>{player.recYds || '0'}</Table.Cell>
-              <Table.Cell>{player.recTds || '0'}</Table.Cell>
-              <Table.Cell>{player.ruYds || '0'}</Table.Cell>
-              <Table.Cell>{player.ruTds || '0'}</Table.Cell>
-              <Table.Cell>{player.retYds || '0'}</Table.Cell>
-              <Table.Cell>{player.retTds || '0'}</Table.Cell>
+              {offStatCategories.map((stat, index) => (
+                <Table.Cell key={index} >{player[stat] || '-'}</Table.Cell>
+              ))}
+
             </Table.Row>
           ))}
         </Table.Body>

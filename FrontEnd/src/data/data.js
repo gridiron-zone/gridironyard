@@ -7,7 +7,7 @@ const data = {
       jersey_number: 4,
       team: 'Oakland Raiders',
       passYds: 3937,
-      passTDs: 28,
+      passTds: 28,
       passInt: 6,
       ruYds: 70,
     },
@@ -18,7 +18,7 @@ const data = {
       jersey_number: 2,
       team: 'Atlanta Falcons',
       passYds: 4944,
-      passTDs: 38,
+      passTds: 38,
       passInt: 7,
       ruYds: 117,
     },
@@ -85,7 +85,7 @@ const data = {
       jersey_number: 1,
       team: 'Carolina Panthers',
       passYds: 3509,
-      passTDs: 19,
+      passTds: 19,
       passInt: 14,
       ruYds: 359,
       ruTds: 5,
@@ -201,22 +201,22 @@ const data = {
   ],
   users: [
     {
-      username: 'user1',
+      username: 'The 1st User #1',
       email: 'user1@test.com',
       password: 'test1'
     },
     {
-      username: 'user2',
+      username: 'Number 2 user',
       email: 'user2@test.com',
       password: 'test2'
     },
     {
-      username: 'user3',
+      username: 'Bronze',
       email: 'user3@test.com',
       password: 'test3'
     },
     {
-      username: 'user4',
+      username: 'Loser # 4',
       email: 'user4@test.com',
       password: 'test4'
     },
@@ -253,8 +253,11 @@ const data = {
   ]
 };
 export const positionList = ['QB','RB','WR','TE','FLEX','DEF','K'];
+export const offStatCategories = ['position', 'name', 'team', 'owner', 'passYds', 'passTds', 'passInt', 'ruYds', 'ruTds', 'recs', 'recYds', 'recTds', 'retYds', 'retTds', 'fumTd', '2PT', 'points'];
+export const defStatCategories = ['position', 'name', 'team', 'owner', 'sacks', 'ints', 'safety', 'defTds', 'defRetTds', 'ptsAllow', 'points'];
+export const kickStatCategories = ['position', 'name', 'team', 'owner', 'pats', 'u20', 'u30', 'u40', 'u50', 'o50', 'points'];
 export const positionsObj = [
-  { key: 'all', value: 'ALL', text: 'Show All'},
+  { key: 'offense', value: 'OFFENSE', text: 'All Offense'},
   { key: 'qb', value: 'QB', text:'Quarterback'},
   { key: 'rb', value: 'RB', text:'Running Back'},
   { key: 'wr', value: 'WR', text:'Wide Receiver'},

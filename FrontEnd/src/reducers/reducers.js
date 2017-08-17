@@ -1,19 +1,33 @@
+import { combineReducers } from 'redux';
 import R from 'ramda';
 // grab our fake data
 import data from '../data/data';
 // action import
 
-const initialState = {
+const initialPlayerState = {
   players: data.players,
-  loggedInUser: data.users[0],
   currentView: 'league',
   currentSubView: 'scoreboard',
-  currentPlayerFilter: 'ALL',
+  currentPlayerFilter: 'OFFENSE',
   sortPlayersBy: 'rank',
-  sortAscending: true,
+  sortAscending: true
+}
+const initialUserState = {
+  loggedInUser: data.users[0],
+  leagueId: 1,
+  teamId: 1
 }
 
-const reducer = function(state = initialState, action) {
+const userReducer = function(state = initialUserState, action) {
+  switch (action.type) {
+    case 'LOGIN_USER':
+      return R.assoc('loggedInUser', action.userId, state);
+    default:
+      return state;
+  }
+}
+
+const playerReducer = function(state = initialPlayerState, action) {
   switch (action.type) {
     case 'FILTER_PLAYERS':
       return {
@@ -44,5 +58,10 @@ const reducer = function(state = initialState, action) {
       return state;
   }
 }
+
+const reducer = combineReducers({
+  userReducer,
+  playerReducer
+})
 
 export default reducer;
