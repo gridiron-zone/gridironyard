@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Login from '../containers/Login';
 import League from './League';
@@ -22,8 +21,6 @@ class App extends Component {
     super();
     this.state = {
       activeItem: 'league',
-      leagueId: 1,
-      teamId: 1
     }
   }
 
@@ -34,7 +31,7 @@ class App extends Component {
 
   render() {
     const { activeItem } = this.state;
-    const { user, leagueId, teamId } = this.props;
+    const { user } = this.props;
     const Subview = appSubComponents[activeItem];
     return (
       <div className="App">

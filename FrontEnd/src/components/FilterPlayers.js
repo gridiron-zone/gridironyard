@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Dropdown, Label } from 'semantic-ui-react';
+import { Dropdown } from 'semantic-ui-react';
 import { positionsObj } from '../data/data';
 import { filterPlayers } from '../actions/actions';
 

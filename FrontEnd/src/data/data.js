@@ -1,3 +1,5 @@
+import makeSchedule from './scheduler';
+
 const data = {
   players: [
     {
@@ -266,5 +268,7 @@ export const positionsObj = [
   { key: 'def', value: 'DEF', text:'Team Defense'},
   { key: 'k', value: 'K', text:'Kicker'}
 ]
+
+export const schedule = makeSchedule(data.users.map(user => user.username), 16);
 
 export default data;

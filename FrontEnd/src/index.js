@@ -1,14 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './styles/index.css';
 import 'semantic-ui-css/semantic.min.css';
 // component import
 import App from './components/App';
-import League from './components/League';
-import Team from './components/Team';
-import Players from './containers/Players';
-import Login from './containers/Login';
 // import for store creation
 import reducer from './reducers/reducers';
 import { Provider } from 'react-redux';
@@ -23,10 +18,9 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store} >
-    <BrowserRouter>
+
       <App />
-        
-    </BrowserRouter>
+    
   </Provider>
   , document.getElementById('root'));
 registerServiceWorker();
