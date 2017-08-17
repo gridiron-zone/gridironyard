@@ -252,6 +252,18 @@ const data = {
       email: 'user10@test.com',
       password: 'test10'
     }
+  ],
+  roster: [
+    {position: 'qb', name: 'Derek Carr'},
+    {position: 'rb', name: 'Adrian Peterson'},
+    {position: 'wr', name: 'Antonio Brown'},
+    {position: 'te', name: 'Kyle Rudolph'},
+    {position: 'flex', name: 'Julio Jones'},
+    {position: 'def', name: 'Broncos Defense'},
+    {position: 'k', name: 'Matt Bryant'},
+    {position: 'bench1', name: ''},
+    {position: 'bench2', name: ''},
+    {position: 'bench3', name: ''}
   ]
 };
 export const positionList = ['QB','RB','WR','TE','FLEX','DEF','K'];

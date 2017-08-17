@@ -30,8 +30,8 @@ class Scoreboard extends Component {
       <div className='scoreboard'>
         <h1 style={{color: 'black'}}>League Name Scoreboard:</h1>
         <Button onClick={this.handleClick('dec')}>&lt;</Button>Week {week + 1}<Button onClick={this.handleClick('inc')}>&gt;</Button>
-        {schedule[week].map(matchup => (
-          <Table basic celled >
+        {schedule[week].map((matchup, index) => (
+          <Table basic celled key={index}>
             <Table.Row>
               <Table.Cell width={8}>{matchup[0]}</Table.Cell>
               <Table.Cell width={4}>0</Table.Cell>
