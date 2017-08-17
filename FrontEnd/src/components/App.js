@@ -31,6 +31,8 @@ class App extends Component {
 
   componentDidMount() {
     fetch('/nfl_teams/api')
+    .then(response => response.json())
+    .then(data => console.log(data));
   }
 
   render() {
