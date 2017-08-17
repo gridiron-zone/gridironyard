@@ -11,13 +11,20 @@ class FilterPlayers extends Component {
     return (
       <div className='filter-container'>
         <Dropdown placeholder='Filter by Position'
-          icon='filter'
           className='icon'
-          fluid
+          icon='filter'
+          button
+          inline
+          floating
           compact
           selection
+          labeled
+          header='Filter By Position'
           onChange={(event, data) => this.props.filterPlayers(data.value)}
-          options={positionsObj} />
+          options={positionsObj}
+          defaultValue='OFFENSE'
+          style={{color: 'black'}}
+        />
 
       </div>
     );

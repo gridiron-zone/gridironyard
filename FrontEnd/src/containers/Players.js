@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FilterPlayers from '../components/FilterPlayers';
 import OffPlayerTable from '../components/OffPlayerTable';
+import DefPlayerTable from '../components/DefPlayerTable';
+import KickPlayerTable from '../components/KickPlayerTable';
 import {sortPlayers} from '../actions/actions';
 
 class Players extends Component {
@@ -16,14 +18,23 @@ class Players extends Component {
     }
   }
 
-  render() {
-    const {players} = this.props;
+  showPlayers = () => {
+    const {players, currentPlayerFilter} = this.props;
+    if (currentPlayerFilter === 'DEF') {
+      return <DefPlayerTable players={players} onClick={this.handleClick} />
+    } else if (currentPlayerFilter === 'K') {
+      return <KickPlayerTable players={players} onClick={this.handleClick} />
+    } else {
+      return <OffPlayerTable players={players} onClick={this.handleClick}/>
+    }
+  }
 
+  render() {
     return (
       <div>
         <FilterPlayers />
         <h3>Players:</h3>
-        <OffPlayerTable players={players} onClick={this.handleClick}/>
+        {this.showPlayers()}
       </div>
     );
   }
@@ -34,7 +45,8 @@ class Players extends Component {
 const mapStateToProps = function(state) {
   let players;
   const flexPositions = ['WR', 'RB', 'TE'];
-  const {currentPlayerFilter, sortPlayersBy, sortAscending} = state;
+  const offensePositions = ['QB', 'RB', 'WR', 'TE'];
+  const {currentPlayerFilter, sortPlayersBy, sortAscending} = state.playerReducer;
   switch (currentPlayerFilter) {
     case 'QB':
     case 'RB':
@@ -42,16 +54,19 @@ const mapStateToProps = function(state) {
     case 'TE':
     case 'K':
     case 'DEF':
-      players = state.players.filter(player => player.position === currentPlayerFilter);
+      players = state.playerReducer.players.filter(player => player.position === currentPlayerFilter);
       break;
     case 'FLEX':
-      players = state.players.filter(player => flexPositions.includes(player.position));
+      players = state.playerReducer.players.filter(player => flexPositions.includes(player.position));
+      break;
+    case 'OFFENSE':
+      players = state.playerReducer.players.filter(player => offensePositions.includes(player.position));
       break;
     default:
-      players = state.players.map(player => player);
+      players = state.playerReducer.players.map(player => player);
   }
 
-  return {players, sortPlayersBy, sortAscending};
+  return {players, currentPlayerFilter, sortPlayersBy, sortAscending};
 }
 
 

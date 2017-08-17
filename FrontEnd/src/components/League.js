@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Segment } from 'semantic-ui-react';
+import { Menu, Container } from 'semantic-ui-react';
 import Leaderboard from '../containers/Leaderboard';
 import Scoreboard from '../containers/Scoreboard';
 import Messages from './Messages';
@@ -24,15 +24,15 @@ class League extends Component {
     const { activeItem } = this.state;
     const Subview = components[activeItem];
     return (
-      <div style={{backgroundColor: 'blue'}}>
+      <div style={{backgroundColor: 'white'}}>
         <Menu attached='top' secondary>
-          <Menu.Item name='scoreboard' active={activeItem === 'scoreboard'} onClick={this.handleItemClick}  />
           <Menu.Item name='leaderboard' active={activeItem === 'leaderboard'} onClick={this.handleItemClick}  />
+          <Menu.Item name='scoreboard' active={activeItem === 'scoreboard'} onClick={this.handleItemClick}  />
           <Menu.Item name='messages' active={activeItem === 'messages'} onClick={this.handleItemClick}  />
         </Menu>
-        <Segment>
+        <Container>
           {Subview}
-        </Segment>
+        </Container>
       </div>
     );
   }

@@ -1,3 +1,11 @@
+export function loginUser(userId, password) {
+  return {
+    type: 'LOGIN_USER',
+    userId,
+    password
+  }
+}
+
 export function filterPlayers(filter) {
   return {
     type: 'FILTER_PLAYERS',
