@@ -1,4 +1,3 @@
-let allteams = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
 /*
 makeSchedule() takes an array of teams and integer number of games
 to generate an array of round-robin style matchups. As of now, requires an even
@@ -20,8 +19,3 @@ export default function makeSchedule(teams, numGames) {
   }
   return schedule;
 }
-
-const newSchedule = makeSchedule(allteams, 16);
-
-
-console.log(newSchedule);
