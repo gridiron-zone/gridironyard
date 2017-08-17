@@ -29,6 +29,10 @@ class App extends Component {
     this.setState({ activeItem: name });
   }
 
+  componentDidMount() {
+    fetch('/nfl_teams/api')
+  }
+
   render() {
     const { activeItem } = this.state;
     const { user } = this.props;
