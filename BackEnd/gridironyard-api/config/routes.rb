@@ -4,4 +4,10 @@ Rails.application.routes.draw do
   get '/stats_api', to: 'game_stats#index'
   get '/home_stats_api', to: 'game_stats#home_team'
   get '/away_stats_api', to: 'game_stats#away_team'
+  
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
+  get '/signup'=> 'users#new'
+  post '/users' => 'users#create'
 end
