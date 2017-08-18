@@ -17,9 +17,4 @@ class NflTeamsController < ApplicationController
     @teams = NflTeam.all
     render json: @teams
   end
-
-  def stats_cache
-    @players = NflData::API::Player.get_all
-    render json: @players
-  end
 end
