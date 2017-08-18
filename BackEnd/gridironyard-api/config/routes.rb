@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy'
   get '/signup'=> 'users#new'
   post '/users' => 'users#create'
+  get '/stats_api', to: 'nfl_players#index'
+  get '/home_stats_api', to: 'nfl_players#home_team'
+  get '/away_stats_api', to: 'nfl_players#away_team'
 end
