@@ -1,9 +1,8 @@
-class CreateNflPlayers < ActiveRecord::Migration[5.1]
+class CreatePlayers < ActiveRecord::Migration[5.1]
   def change
-    create_table :nfl_players do |t|
+    create_table :players do |t|
       t.string :name
       t.string :position
-      t.string :jersey
       t.text :stats
 
       t.timestamps
