@@ -15,3 +15,7 @@
 .scoreboard {
   color: black;
 }
+
+.header-text {
+  text-transform: uppercase;
+}

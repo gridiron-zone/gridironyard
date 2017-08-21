@@ -24,13 +24,13 @@ class League extends Component {
     const { activeItem } = this.state;
     const Subview = components[activeItem];
     return (
-      <div style={{backgroundColor: 'white'}}>
+      <div style={{backgroundColor: 'white', border: '1px solid gray', borderRadius: '5px'}}>
         <Menu attached='top' secondary>
           <Menu.Item name='leaderboard' active={activeItem === 'leaderboard'} onClick={this.handleItemClick}  />
           <Menu.Item name='scoreboard' active={activeItem === 'scoreboard'} onClick={this.handleItemClick}  />
           <Menu.Item name='messages' active={activeItem === 'messages'} onClick={this.handleItemClick}  />
         </Menu>
-        <Container>
+        <Container style={{paddingBottom: '25px'}}>
           {Subview}
         </Container>
       </div>

@@ -29,17 +29,21 @@ class Scoreboard extends Component {
     return (
       <div className='scoreboard'>
         <h1 style={{color: 'black'}}>League Name Scoreboard:</h1>
-        <Button onClick={this.handleClick('dec')}>&lt;</Button>Week {week + 1}<Button onClick={this.handleClick('inc')}>&gt;</Button>
+        <Button onClick={this.handleClick('dec')} size='tiny' icon='arrow left' />
+        Week {week + 1}
+        <Button onClick={this.handleClick('inc')} size='tiny' icon='arrow right' />
         {schedule[week].map((matchup, index) => (
-          <Table basic celled key={index}>
-            <Table.Row>
-              <Table.Cell width={8}>{matchup[0]}</Table.Cell>
-              <Table.Cell width={4}>0</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>{matchup[1]}</Table.Cell>
-              <Table.Cell>0</Table.Cell>
-            </Table.Row>
+          <Table basic celled key={index} color='black' inverted>
+            <Table.Body>
+              <Table.Row>
+                <Table.Cell width={8}>{matchup[0]}</Table.Cell>
+                <Table.Cell width={4}>0</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>{matchup[1]}</Table.Cell>
+                <Table.Cell>0</Table.Cell>
+              </Table.Row>
+            </Table.Body>
           </Table>
         ))}
       </div>
