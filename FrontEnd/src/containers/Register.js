@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Button, Header } from 'semantic-ui-react';
 
 export default class Register extends Component {
   constructor(props) {
@@ -43,13 +43,15 @@ export default class Register extends Component {
 
   render() {
     return (
-      <div>
-        <Form onSubmit={this.handleSubmit}>Sign Up!
+      <div style={{width: '50%'}}>
+        <Form onSubmit={this.handleSubmit}><Header>Sign Up!</Header>
           <Form.Input label='Username' type='text' onChange={this.handleChange('username')}/>
-          <Form.Input label='Enter Password' type='password' onChange={this.handleChange('password')} />
-          <Form.Input label='Confirm Password' type='password' onChange={this.handleChange('password_confirmation')} />
+          <Form.Group widths='equal'>
+            <Form.Input label='Enter Password' type='password' onChange={this.handleChange('password')} />
+            <Form.Input label='Confirm Password' type='password' onChange={this.handleChange('password_confirmation')} />
+          </Form.Group>
           <Form.Input label='Team Name' type='text' onChange={this.handleChange('team')} />
-          <Button type="submit">Submit</Button>
+          <Button type="submit" color='blue'>Submit</Button>
         </Form>
       </div>
     );
