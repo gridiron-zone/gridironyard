@@ -19,3 +19,21 @@
 .header-text {
   text-transform: uppercase;
 }
+
+.score-box {
+  height: 100%;
+  width: 100%;
+  padding: 11px;
+  display: block;
+}
+
+.flash.transition {
+  background-color: #21ba45;
+  color: 'white';
+}
+
+.flash {
+  background-color: #000000;
+  color: 'white';
+  transition: all 500ms ease-in;
+}

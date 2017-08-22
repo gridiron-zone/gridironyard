@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
-import { Button, Table } from 'semantic-ui-react';
+import { Button, Table, Transition } from 'semantic-ui-react';
+import { CSSTransitionGroup } from 'react-transition-group';
 import {schedule} from '../data/data';
 
 class Scoreboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      week: 0
+      week: 0,
+      scores: [
+        [0, 0, true, true],
+        [0, 0, true, true],
+        [0, 0, true, true],
+        [0, 0, true, true],
+        [0, 0, true, true]
+      ],
+      visible: true
     }
   }
 
@@ -24,8 +33,26 @@ class Scoreboard extends Component {
     }
   }
 
+  toggleVisibility = (row, team) => {
+    const { scores } = this.state;
+    scores[row][team] = !this.state.scores[row][team];
+    this.setState({ ...this.state, scores })
+  }
+
+  randomScoreChange = (event) => {
+    const { scores } = this.state;
+    const row = Math.floor(Math.random() * scores.length);
+    const team = Math.round(Math.random());
+    scores[row][team] += 1;
+    this.setState({
+      ...this.state,
+      scores
+    });
+    this.toggleVisibility(row, (team + 2));
+  }
+
   render() {
-    const {week} = this.state;
+    const {week, scores, visible} = this.state;
     return (
       <div className='scoreboard'>
         <h1 style={{color: 'black'}}>League Name Scoreboard:</h1>
@@ -37,15 +64,30 @@ class Scoreboard extends Component {
             <Table.Body>
               <Table.Row>
                 <Table.Cell width={8}>{matchup[0]}</Table.Cell>
-                <Table.Cell width={4}>0</Table.Cell>
+                <Table.Cell style={{padding: '0px'}}>
+                  <Transition
+                    animation='flash'
+                    duration={1000}
+                    visible={scores[index][2]}>
+                    <span className='score-box'>{scores[index][0]}</span>
+                  </Transition>
+                </Table.Cell>
               </Table.Row>
               <Table.Row>
                 <Table.Cell>{matchup[1]}</Table.Cell>
-                <Table.Cell>0</Table.Cell>
+                <Table.Cell style={{padding: '0px'}}>
+                  <Transition
+                    animation='flash'
+                    duration={1000}
+                    visible={scores[index][3]}>
+                    <div className='score-box'>{scores[index][1]}</div>
+                  </Transition>
+                </Table.Cell>
               </Table.Row>
             </Table.Body>
           </Table>
         ))}
+        <Button onClick={this.randomScoreChange} size='tiny' icon='random' />
       </div>
     );
   }
