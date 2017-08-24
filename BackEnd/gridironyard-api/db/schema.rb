@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170818164933) do
+ActiveRecord::Schema.define(version: 20170824194047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,12 +23,24 @@ ActiveRecord::Schema.define(version: 20170818164933) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "player_stats", force: :cascade do |t|
+    t.text "passing"
+    t.text "rushing"
+    t.text "receiving"
+    t.text "defense"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "player_id"
+    t.index ["player_id"], name: "index_player_stats_on_player_id"
+  end
+
   create_table "players", force: :cascade do |t|
     t.string "name"
     t.string "position"
-    t.text "stats"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "nfl_id"
   end
 
+  add_foreign_key "player_stats", "players"
 end
