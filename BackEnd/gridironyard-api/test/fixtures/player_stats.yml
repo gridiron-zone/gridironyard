@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  passing: MyText
+  rushing: MyText
+  receiving: MyText
+  defense: MyText
+
+two:
+  passing: MyText
+  rushing: MyText
+  receiving: MyText
+  defense: MyText
