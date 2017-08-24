@@ -33,10 +33,11 @@ class Players extends Component {
 
   componentDidMount() {
     let allPlayers = [];
-    // fetch('/nfl_teams/api')
-    // .then(response => response.json())
-    // .then(data => console.log(data));
+    fetch('/nfl_teams/api')
+    .then(response => response.json())
+    .then(data => console.log(data));
 
+    /*
     fetch('http://www.nfl.com/liveupdate/scores/scores.json')
     .then(response => response.json())
     .then(games => {
@@ -50,6 +51,7 @@ class Players extends Component {
         });
       });
     }).then(() => console.log(JSON.stringify(allPlayers)));
+    */
   }
 
   render() {

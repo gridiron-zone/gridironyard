@@ -33,7 +33,7 @@
 }
 
 .flash {
-  background-color: #000000;
+  background-color: #1B1C1D;
   color: 'white';
   transition: all 500ms ease-in;
 }

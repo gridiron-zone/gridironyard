@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, Table, Transition } from 'semantic-ui-react';
-import { CSSTransitionGroup } from 'react-transition-group';
 import {schedule} from '../data/data';
 
 class Scoreboard extends Component {
@@ -64,7 +63,7 @@ class Scoreboard extends Component {
             <Table.Body>
               <Table.Row>
                 <Table.Cell width={8}>{matchup[0]}</Table.Cell>
-                <Table.Cell style={{padding: '0px'}}>
+                <Table.Cell style={{padding: '0px'}} textAlign='center' className='two wide'>
                   <Transition
                     animation='flash'
                     duration={1000}
@@ -75,7 +74,7 @@ class Scoreboard extends Component {
               </Table.Row>
               <Table.Row>
                 <Table.Cell>{matchup[1]}</Table.Cell>
-                <Table.Cell style={{padding: '0px'}}>
+                <Table.Cell style={{padding: '0px'}} textAlign='center' >
                   <Transition
                     animation='flash'
                     duration={1000}
