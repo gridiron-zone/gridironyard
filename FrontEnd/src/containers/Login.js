@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form } from 'semantic-ui-react';
+import { Form, Button } from 'semantic-ui-react';
 import R from 'ramda';
 import { loginUser } from '../actions/actions';
 
@@ -24,6 +24,7 @@ class Login extends Component {
 
   render() {
     const { userId, password } = this.state;
+    const { onClick } = this.props;
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
@@ -33,14 +34,13 @@ class Login extends Component {
             <Form.Button content='Submit' />
           </Form.Group>
         </Form>
+        <Button color='blue' onClick={onClick} >Or, Sign Up!</Button>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  user: state.userReducer.loggedInUser
-}
+
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -48,4 +48,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);

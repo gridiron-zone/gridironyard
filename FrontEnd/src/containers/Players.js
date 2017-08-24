@@ -6,6 +6,8 @@ import DefPlayerTable from '../components/DefPlayerTable';
 import KickPlayerTable from '../components/KickPlayerTable';
 import {sortPlayers} from '../actions/actions';
 
+import { playerScraper } from '../data/scraper';
+
 class Players extends Component {
 
   handleClick = (key) => {
@@ -27,6 +29,29 @@ class Players extends Component {
     } else {
       return <OffPlayerTable players={players} onClick={this.handleClick}/>
     }
+  }
+
+  componentDidMount() {
+    let allPlayers = [];
+    fetch('/nfl_teams/api')
+    .then(response => response.json())
+    .then(data => console.log(data));
+
+    /*
+    fetch('http://www.nfl.com/liveupdate/scores/scores.json')
+    .then(response => response.json())
+    .then(games => {
+      Promise.all(Object.keys(games).map(gameId => {
+        return fetch(`http://www.nfl.com/liveupdate/game-center/${gameId}/${gameId}_gtd.json`)
+        .then(response => response.json());
+      })).then(data => {
+        data.forEach(game => {
+          const {nextupdate, ...data} = game;
+          allPlayers = allPlayers.concat(playerScraper(game[Object.keys(game)[0]]));
+        });
+      });
+    }).then(() => console.log(JSON.stringify(allPlayers)));
+    */
   }
 
   render() {

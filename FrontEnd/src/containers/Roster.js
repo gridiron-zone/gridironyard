@@ -8,21 +8,23 @@ class Roster extends Component {
     return (
       <div className='scoreboard'>
         <h1>Roster</h1>
-        <Table>
+        <Table celled inverted>
           <Table.Header>
-            <Table.HeaderCell>Position</Table.HeaderCell>
-            <Table.HeaderCell>Player Name</Table.HeaderCell>
-            <Table.HeaderCell>Points</Table.HeaderCell>
+            <Table.Row>
+              <Table.HeaderCell textAlign='center'>Position</Table.HeaderCell>
+              <Table.HeaderCell >Player Name</Table.HeaderCell>
+              <Table.HeaderCell textAlign='center'>Points</Table.HeaderCell>
+            </Table.Row>
           </Table.Header>
-
+          <Table.Body>
             {roster.map((pos, index) => (
               <Table.Row key={index}>
-                <Table.Cell>{pos.position}</Table.Cell>
-                <Table.Cell>{pos.name}</Table.Cell>
-                <Table.Cell>{pos.points || '0'}</Table.Cell>
+                <Table.Cell className='header-text' textAlign='center' width={2}>{pos.position}</Table.Cell>
+                <Table.Cell width={14}>{pos.name}</Table.Cell>
+                <Table.Cell width={2} textAlign='center'>{pos.points || '0'}</Table.Cell>
               </Table.Row>
             ))}
-
+          </Table.Body>
         </Table>
       </div>
     );
