@@ -3,8 +3,8 @@ require 'stats_api'
 class GameStatsController < ApplicationController
   attr_accessor :stats_api
   def index
-    set_api
-    render json: @stats_api
+    @stats = PlayerStat.all
+    render json: @stats
   end
 
   def home_team_stats
