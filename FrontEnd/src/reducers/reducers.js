@@ -7,13 +7,13 @@ import data from '../data/data';
 const initialPlayerState = {
   players: data.players,
   currentView: 'league',
-  currentSubView: 'scoreboard',
+  currentSubView: 'leaderboard',
   currentPlayerFilter: 'OFFENSE',
   sortPlayersBy: 'rank',
   sortAscending: true
 }
 const initialUserState = {
-  loggedInUser: data.users[0],
+  loggedInUser: {},
   leagueId: 1,
   teamId: 1
 }
