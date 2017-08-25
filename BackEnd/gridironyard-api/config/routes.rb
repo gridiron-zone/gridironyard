@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get '/home_stats_api', to: 'game_stats#home_team_stats'
   get '/away_stats_api', to: 'game_stats#away_team_stats'
   get 'players_cache', to: 'players#player_cache'
-  get '/players_api', to: 'players#index', as: 'players'
+  get '/players_api', to: 'players#index', as: 'players', format: 'json'
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
