@@ -1,12 +1,18 @@
 const fs = require('fs');
-const playerData = require('./Basic_Stats.csv');
+const playerData = fs.readFileSync('./Basic_Stats.csv', { encoding: 'utf8'});
 
 const players = playerData.split('\n');
-const playerKeys = players[0].split(',');
+const playerKeys = players.shift().split(',');
+const BasicPlayerData = players.map(function(player, index) {
+  const thisPlayerData = player.split(',');
+  const aPlayer = {}
+  thisPlayerData.forEach((item, idx) => aPlayer[playerKeys[idx]] = thisPlayerData[idx].trim());
+  return aPlayer;
+});
+const ActivePlayerData = BasicPlayerData.filter(player => player.Status === 'Active');
+fs.writeFileSync('./BasicPlayerData.json', JSON.stringify(ActivePlayerData));
 
-console.log(playerKeys);
-
-
+/*
 export function playerScraper(game = {}) {
   let teamPlayers = [];
 	if (Object.keys(game).length === 0) return [];
@@ -34,3 +40,4 @@ export function playerScraper(game = {}) {
   });
   return teamPlayers;
 }
+*/
