@@ -33,7 +33,7 @@ class Players extends Component {
 
   componentDidMount() {
     let allPlayers = [];
-    fetch('/nfl_teams/api')
+    fetch('/players_api')
     .then(response => response.json())
     .then(data => console.log(data));
 

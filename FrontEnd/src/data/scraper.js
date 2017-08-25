@@ -1,3 +1,11 @@
+const fs = require('fs');
+const playerData = require('./Basic_Stats.csv');
+
+const players = playerData.split('\n');
+const playerKeys = players[0].split(',');
+
+console.log(playerKeys);
+
 
 export function playerScraper(game = {}) {
   let teamPlayers = [];
