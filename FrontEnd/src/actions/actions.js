@@ -1,8 +1,15 @@
-export function loginUser(userId, password) {
+export function loginUser(user, password) {
   return {
     type: 'LOGIN_USER',
-    userId,
+    user,
     password
+  }
+}
+
+export function logoutUser() {
+  return {
+    type: 'LOGOUT_USER',
+    payload: {}
   }
 }
 
