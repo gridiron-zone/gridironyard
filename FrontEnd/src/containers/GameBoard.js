@@ -31,7 +31,10 @@ class GameBoard extends Component {
 
   render() {
     const {game, loading, gameId} = this.state;
+
     if (game) {
+      const lastDrive = game.drives[game.drives.crntdrv];
+      const lastPlay = lastDrive.plays[Object.keys(lastDrive.plays).pop()];
       let downString;
       switch(game.down) {
         case '1':
@@ -118,6 +121,8 @@ class GameBoard extends Component {
           </Table>
           <Segment vertical>
             {game.qtr && game.qtr !== 'Final' ? `${downString} & ${game.togo}, ball on ${game.yl}` : ''}
+            <Header>Last Play:</Header>
+            <span style={{fontWeight: 'bold'}}>{lastPlay.posteam}</span>: {lastPlay.desc}
           </Segment>
           <Segment vertical>
             <Header size='small'>Scoring Summary:</Header>
