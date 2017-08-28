@@ -27,9 +27,9 @@ class App extends Component {
     }
   }
 
-  handleItemClick = (e, { name = 'register' }) => {
-    console.log(name);
-    changeView({ name });
+  handleItemClick = (e, data) => {
+    const { changeView } = this.props;
+    changeView(data.name);
   }
 
   handleLogout = () => {
@@ -38,7 +38,8 @@ class App extends Component {
   }
 
   render() {
-    const { activeItem } = this.props;
+    const {activeItem} = this.props;
+    console.log(activeItem);
     const { user } = this.props;
     if (!user) {
 
@@ -85,6 +86,9 @@ const mapDispatchToProps = function(dispatch) {
   return {
     logoutUser: function() {
       dispatch(logoutUser());
+    },
+    changeView: function(view) {
+      dispatch(changeView(view));
     }
   }
 }

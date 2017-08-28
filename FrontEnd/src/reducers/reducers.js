@@ -26,9 +26,9 @@ const userReducer = function(state = initialUserState, action) {
     case 'LOGOUT_USER':
       return R.assoc('loggedInUser', {}, state);
     case 'CHANGE_VIEW':
-      return R.assoc('currentView', action.payload, state);
+      return R.assoc('currentView', action.view, state);
     case 'CHANGE_SUBVIEW':
-      return R.assoc('currentSubview', action.payload, state);
+      return R.assoc('currentSubview', action.view, state);
     default:
       return state;
   }

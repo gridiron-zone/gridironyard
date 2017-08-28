@@ -31,13 +31,13 @@ export function sortPlayers(sortPlayersBy, sortAscending) {
 export function changeView(view) {
   return {
     type: 'CHANGE_VIEW',
-    payload: view
+    view
   }
 }
 
 export function changeSubview(view) {
   return {
     type: 'CHANGE_SUBVIEW',
-    payload: view
+    view
   }
 }

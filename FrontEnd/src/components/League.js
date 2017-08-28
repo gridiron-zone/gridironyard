@@ -6,10 +6,10 @@ import Messages from './Messages';
 import NFLScoreboard from  '../containers/NFLScoreboard';
 
 const components = {
-  leaderboard: <Leaderboard />,
-  scoreboard: <Scoreboard />,
-  nflScoreboard: <NFLScoreboard />,
-  messages: <Messages />
+  leaderboard: Leaderboard,
+  scoreboard: Scoreboard,
+  nflScoreboard: NFLScoreboard,
+  messages: Messages
 };
 
 class League extends Component {
@@ -33,8 +33,8 @@ class League extends Component {
           <Menu.Item name='nflScoreboard' active={activeItem === 'nflScoreboard'} onClick={this.handleItemClick}  />
           <Menu.Item name='messages' active={activeItem === 'messages'} onClick={this.handleItemClick}  />
         </Menu>
-        <Container style={{paddingBottom: '25px'}}>
-          {Subview}
+        <Container style={{padding: '25px'}}>
+          <Subview />
         </Container>
       </div>
     );
