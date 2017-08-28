@@ -7,7 +7,6 @@ class NFLGameSummary extends Component {
     return (
       <Table
         celled
-        collapsing
         color={game.redzone ? 'red' : 'black'}
         inverted
         size='small'

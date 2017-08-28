@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Container } from 'semantic-ui-react';
+import { Container, Accordion } from 'semantic-ui-react';
 import NFLGameSummary from './NFLGameSummary';
 import GameBoard from './GameBoard';
 
@@ -51,22 +51,22 @@ export default class NFLScoreboard extends Component {
     return (
       <div>
         <h1>NFL Games this week:</h1>
-        <Grid columns={2}>
-          <Grid.Column>
           {games.map((gameId, index) =>
-            (<NFLGameSummary
-                key={gameId}
-                game={scores[gameId]}
-                gameId={gameId}
-                onClick={this.selectGame}/>)
+            (
+              <Accordion key={gameId}>
+                <Accordion.Title>
+                <NFLGameSummary
+                  game={scores[gameId]}
+                  gameId={gameId}
+                  onClick={this.selectGame}/>
+                </Accordion.Title>
+                <Accordion.Content>
+                  <GameBoard gameId={gameId} />
+                </Accordion.Content>
+              </Accordion>
+            )
           )}
-          </Grid.Column>
-          <Grid.Column>
-            <Container>
-              {selectedGame ? <GameBoard gameId={selectedGame} /> : null}
-            </Container>
-          </Grid.Column>
-        </Grid>
+
       </div>
     );
   }

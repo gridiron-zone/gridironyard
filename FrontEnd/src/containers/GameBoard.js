@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Table, Dimmer, Loader } from 'semantic-ui-react';
+import { Segment, Table, Dimmer, Loader, Menu, Header, Container, Image, Feed } from 'semantic-ui-react';
 
 class GameBoard extends Component {
 
@@ -54,11 +54,32 @@ class GameBoard extends Component {
           <Dimmer active={loading}>
             <Loader />
           </Dimmer>
-          <img src={`http://i.nflcdn.com/static/site/7.5/img/logos/teams-matte-80x53/${game.home.abbr}.png`} />
-          <img src={`http://i.nflcdn.com/static/site/7.5/img/logos/teams-matte-80x53/${game.away.abbr}.png`} />
+          <Menu fluid size='huge' widths={4} compact>
+            <Menu.Item>
+              <Header size='large'>{game.home.abbr}</Header>
+              <Image src={`http://i.nflcdn.com/static/site/7.5/img/logos/teams-matte-80x53/${game.home.abbr}.png`}
+                alt='home logo'
+                verticalAlign='middle'
+                inline />
+            </Menu.Item>
+            <Menu.Item>
+              <Header size='huge'>{game.home.score['T']}</Header>
+            </Menu.Item>
+            <Menu.Item>
+              <Header size='huge'>{game.away.score['T']}</Header>
+            </Menu.Item>
+            <Menu.Item>
+              <Image src={`http://i.nflcdn.com/static/site/7.5/img/logos/teams-matte-80x53/${game.away.abbr}.png`}
+                alt='away logo'
+                verticalAlign='middle'
+                inline />
+              <Header size='large'>{game.away.abbr}</Header>
+            </Menu.Item>
+          </Menu>
+
+          <Container textAlign='center'>
           <Table
             celled
-            collapsing
             size='small'
           >
             <Table.Header>
@@ -95,9 +116,32 @@ class GameBoard extends Component {
               </Table.Row>
             </Table.Footer>
           </Table>
-          <Segment>
-            {`${downString} & ${game.togo}, ball on ${game.yl}`}
+          <Segment vertical>
+            {game.qtr && game.qtr !== 'Final' ? `${downString} & ${game.togo}, ball on ${game.yl}` : ''}
           </Segment>
+          <Segment vertical>
+            <Header size='small'>Scoring Summary:</Header>
+            <Feed>
+            {Object.keys(game.scrsummary).map((play, idx) => {
+              const drive = game.scrsummary[play];
+              const { type, desc, qtr, team } = drive;
+              return (
+                <Feed.Event key={idx}>
+                  <Feed.Label>
+                    <Image src={`http://i.nflcdn.com/static/site/7.5/img/logos/teams-matte-80x53/${team}.png`} size='tiny' alt='logo' />
+                  </Feed.Label>
+                  <Feed.Content>
+                    <Feed.Summary>
+                      <Feed.User>{type}&nbsp;{team}</Feed.User> {desc}
+                      <Feed.Date>{qtr} QTR</Feed.Date>
+                    </Feed.Summary>
+                  </Feed.Content>
+                </Feed.Event>
+              )}
+            )}
+            </Feed>
+          </Segment>
+          </Container>
         </Segment>
       )
     } else {
