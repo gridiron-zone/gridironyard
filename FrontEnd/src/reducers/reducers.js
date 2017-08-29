@@ -11,7 +11,7 @@ const initialPlayerState = {
   sortAscending: true
 }
 const initialUserState = {
-  loggedInUser: { username: 'bob' },
+  loggedInUser: {},
   currentView: 'league',
   currentSubView: 'leaderboard',
   currentPlayerFilter: 'OFFENSE',

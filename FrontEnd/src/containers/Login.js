@@ -10,17 +10,22 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '',
+      username: '',
       password: ''
     }
   }
 
-  handleChange = key => event => {
-    this.setState(R.assoc(key, event.target.value, this.state));
+  handleChange = (e, data) => {
+    this.setState(R.assoc(data.name, data.value, this.state));
   }
   handleLogin = () => {
     const {loginUser} = this.props;
-    loginUser(this.state);
+    const {username} = this.state;
+    loginUser({username});
+  }
+
+  handleRegister = () => {
+
   }
 
   render() {
@@ -32,7 +37,7 @@ class Login extends Component {
         <Segment style={{margin: 'auto'}}>
           <Form onSubmit={this.handleLogin}>
             <Form.Group>
-              <Form.Input placeholder='Email' name='email' type='email' value={userId} onChange={this.handleChange} />
+              <Form.Input placeholder='User Name' name='username' type='text' value={userId} onChange={this.handleChange} />
               <Form.Input placeholder='Password' name='password' type='password' value={password} onChange={this.handleChange} />
               <Form.Button content='Log In' />
             </Form.Group>
@@ -40,7 +45,7 @@ class Login extends Component {
         </Segment>
         <Divider horizontal>OR SIGN UP</Divider>
         <Segment style={{alignItems: 'center'}}>
-          <Register />
+          <Register onSubmit={this.handleRegister}/>
         </Segment>
 
       </div>
