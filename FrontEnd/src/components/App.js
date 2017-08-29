@@ -39,13 +39,9 @@ class App extends Component {
 
   render() {
     const {activeItem} = this.props;
+    const Subview = appSubComponents[activeItem];
     console.log(activeItem);
     const { user } = this.props;
-    if (!user) {
-
-    }
-    const Subview = appSubComponents[activeItem];
-
     return (
       <div className="App">
         <div className="App-header" style={{background: ` no-repeat top/cover url(${background})` }}>
@@ -65,12 +61,15 @@ class App extends Component {
           </Menu.Menu>
         </Menu>
         <Segment inverted color='green'>
-          <Subview onClick={this.handleItemClick} />
+          {user.hasOwnProperty('username') ?
+            <Subview onClick={this.handleItemClick} /> :
+            <Login />}
         </Segment>
       </div>
     );
   }
 }
+
 const mapStateToProps = function(state) {
   const { userReducer } = state;
   const { loggedInUser, leagueId, teamId, currentView, currentSubview } = userReducer;
