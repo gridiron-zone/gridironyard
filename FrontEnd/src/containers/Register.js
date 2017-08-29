@@ -43,15 +43,15 @@ export default class Register extends Component {
 
   render() {
     return (
-      <div style={{width: '50%'}}>
-        <Form onSubmit={this.handleSubmit}><Header>Sign Up!</Header>
+      <div style={{width: '50%', margin: 'auto'}}>
+        <Form onSubmit={this.handleSubmit}><Header>New Player:</Header>
           <Form.Input label='Username' type='text' onChange={this.handleChange('username')}/>
           <Form.Group widths='equal'>
             <Form.Input label='Enter Password' type='password' onChange={this.handleChange('password')} />
             <Form.Input label='Confirm Password' type='password' onChange={this.handleChange('password_confirmation')} />
           </Form.Group>
           <Form.Input label='Team Name' type='text' onChange={this.handleChange('team')} />
-          <Button type="submit" color='blue'>Submit</Button>
+          <Button type="submit" color='blue'>Sign Up</Button>
         </Form>
       </div>
     );

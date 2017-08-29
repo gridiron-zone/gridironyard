@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Menu, Container } from 'semantic-ui-react';
 import Leaderboard from '../containers/Leaderboard';
 import Scoreboard from '../containers/Scoreboard';
