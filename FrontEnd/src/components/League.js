@@ -33,7 +33,7 @@ class League extends Component {
           <Menu.Item name='nflScoreboard' active={activeItem === 'nflScoreboard'} onClick={this.handleItemClick}  />
           <Menu.Item name='messages' active={activeItem === 'messages'} onClick={this.handleItemClick}  />
         </Menu>
-        <Container style={{padding: '25px'}}>
+        <Container fluid style={{padding: '10px'}}>
           <Subview />
         </Container>
       </div>
