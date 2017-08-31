@@ -25,7 +25,7 @@ export default class Register extends Component {
   handleSubmit = () => {
     const form = this.state;
     console.log(form);
-    fetch('/users',
+    fetch('/users/new/',
     {
       method: 'POST',
       headers: {

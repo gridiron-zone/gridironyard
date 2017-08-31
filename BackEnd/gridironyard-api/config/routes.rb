@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  post 'users/new', to: 'users#create'
-  post '/users', to: 'sessions#create'
+  post 'users/new', to: 'users#create', default: {format: :json}
+  post '/users', to: 'sessions#create', default: {format: :json}
   get '/nfl_teams/api', to: 'nfl_teams#index', as: 'nfl_teams'
   get '/nfl_teams/team_cache', to: 'nfl_teams#team_cache', as: 'team_cache'
   get '/stats_api', to: 'game_stats#index'

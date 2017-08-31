@@ -20,12 +20,36 @@ class Login extends Component {
   }
   handleLogin = () => {
     const {loginUser} = this.props;
-    const {username} = this.state;
-    loginUser({username});
+    fetch('/users/',
+    {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state)
+    })
+    .then(response => response.json())
+    .then(user => loginUser(user))
+    .catch(error => console.log(error));
   }
 
-  handleRegister = () => {
-
+  handleRegister = (form) => {
+    const {loginUser} = this.props;
+    fetch('/users/new/',
+    {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(form)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        loginUser(data);
+      }
+    )
+    .catch(error => console.log(error.json()));
   }
 
   render() {

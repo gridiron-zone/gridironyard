@@ -4,18 +4,20 @@ class SessionsController < ApplicationController
   end
 
   def create
-      user = User.find_by_username(params[:username])
-      # If the user exists AND the password entered is correct.
-      if user && user.authenticate(params[:password])
-        # Save the user id inside the browser cookie. This is how we keep the user
-        # logged in when they navigate around our website.
-        session[:user_id] = user.id
-        redirect_to '/'
+    @user = User.find_by_username(params[:username])
+
+    respond_to? do |format|
+      if @user && @user.authenticate(params[:user][:password])
+        session[:current_user_id] = @user.id
+        session[:current_username] = @user.username
+        format.html {redirect_to questions_path}
+        format.json {render json: {token: @user.api_token}}
       else
-      # If user's login doesn't work, send them back to the login form.
-        redirect_to '/login'
+        format.html {redirect_to new_user_path, notice: "User not found. Please register new user."}
+        format.json {render json: {error: "Invalid"}, status: :unauthorized}
       end
     end
+  end
 
     def destroy
       session[:user_id] = nil
