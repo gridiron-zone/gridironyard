@@ -5,23 +5,16 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by_username(params[:username])
-
-    respond_to? do |format|
-      if @user && @user.authenticate(params[:user][:password])
-        session[:current_user_id] = @user.id
-        session[:current_username] = @user.username
-        format.html {redirect_to questions_path}
-        format.json {render json: {token: @user.api_token}}
-      else
-        format.html {redirect_to new_user_path, notice: "User not found. Please register new user."}
-        format.json {render json: {error: "Invalid"}, status: :unauthorized}
-      end
+    if @user && @user.authenticate(params[:user][:password])
+      render :json @user
+    else
+      render json: {error: "Invalid"}, status: :unauthorized}
     end
   end
 
     def destroy
-      session[:user_id] = nil
-      redirect_to '/'
+      session[:current_user_id] = nil
+      render json: {status: "Logged Out"}
     end
 
     end
