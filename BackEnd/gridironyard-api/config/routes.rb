@@ -8,9 +8,5 @@ Rails.application.routes.draw do
   get 'players_cache', to: 'players#player_cache'
   get '/players_api', to: 'players#index', as: 'players', format: 'json'
 
-  get '/login' => 'sessions#new'
-  post '/login' => 'sessions#create'
-  get '/logout' => 'sessions#destroy'
-  get '/signup'=> 'users#new'
-  post '/users' => 'users#create'
+  
 end
