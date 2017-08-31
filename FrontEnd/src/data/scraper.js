@@ -1,4 +1,5 @@
 
+
 export function playerScraper(game = {}) {
   let teamPlayers = [];
 	if (Object.keys(game).length === 0) return [];

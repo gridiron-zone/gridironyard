@@ -6,7 +6,7 @@ import DefPlayerTable from '../components/DefPlayerTable';
 import KickPlayerTable from '../components/KickPlayerTable';
 import {sortPlayers} from '../actions/actions';
 
-import { playerScraper } from '../data/scraper';
+// import { playerScraper } from '../data/scraper';
 
 class Players extends Component {
 
@@ -32,8 +32,8 @@ class Players extends Component {
   }
 
   componentDidMount() {
-    let allPlayers = [];
-    fetch('/nfl_teams/api')
+    // let allPlayers = [];
+    fetch('/players_api')
     .then(response => response.json())
     .then(data => console.log(data));
 

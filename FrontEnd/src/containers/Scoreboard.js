@@ -14,7 +14,6 @@ class Scoreboard extends Component {
         [0, 0, true, true],
         [0, 0, true, true]
       ],
-      visible: true
     }
   }
 
@@ -51,7 +50,7 @@ class Scoreboard extends Component {
   }
 
   render() {
-    const {week, scores, visible} = this.state;
+    const { week, scores } = this.state;
     return (
       <div className='scoreboard'>
         <h1 style={{color: 'black'}}>League Name Scoreboard:</h1>

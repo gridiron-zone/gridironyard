@@ -1,8 +1,15 @@
-export function loginUser(userId, password) {
+export function loginUser(user, password) {
   return {
     type: 'LOGIN_USER',
-    userId,
+    user,
     password
+  }
+}
+
+export function logoutUser() {
+  return {
+    type: 'LOGOUT_USER',
+    payload: {}
   }
 }
 
@@ -24,13 +31,13 @@ export function sortPlayers(sortPlayersBy, sortAscending) {
 export function changeView(view) {
   return {
     type: 'CHANGE_VIEW',
-    payload: view
+    view
   }
 }
 
 export function changeSubview(view) {
   return {
     type: 'CHANGE_SUBVIEW',
-    payload: view
+    view
   }
 }

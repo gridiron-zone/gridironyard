@@ -6,14 +6,15 @@ import data from '../data/data';
 
 const initialPlayerState = {
   players: data.players,
-  currentView: 'league',
-  currentSubView: 'leaderboard',
-  currentPlayerFilter: 'OFFENSE',
+
   sortPlayersBy: 'rank',
   sortAscending: true
 }
 const initialUserState = {
   loggedInUser: {},
+  currentView: 'league',
+  currentSubView: 'leaderboard',
+  currentPlayerFilter: 'OFFENSE',
   leagueId: 1,
   teamId: 1
 }
@@ -21,7 +22,13 @@ const initialUserState = {
 const userReducer = function(state = initialUserState, action) {
   switch (action.type) {
     case 'LOGIN_USER':
-      return R.assoc('loggedInUser', action.userId, state);
+      return R.assoc('loggedInUser', action.user, state);
+    case 'LOGOUT_USER':
+      return R.assoc('loggedInUser', {}, state);
+    case 'CHANGE_VIEW':
+      return R.assoc('currentView', action.view, state);
+    case 'CHANGE_SUBVIEW':
+      return R.assoc('currentSubview', action.view, state);
     default:
       return state;
   }
@@ -44,16 +51,7 @@ const playerReducer = function(state = initialPlayerState, action) {
         sortPlayersBy: action.sortPlayersBy,
         sortAscending: action.sortAscending
       }
-    case 'CHANGE_VIEW':
-      return {
-        ...state,
-        currentView: action.payload
-      }
-    case 'CHANGE_SUBVIEW':
-      return {
-        ...state,
-        currentSubview: action.payload
-      }
+
     default:
       return state;
   }
