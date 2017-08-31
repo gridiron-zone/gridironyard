@@ -9,7 +9,7 @@ export default class Register extends Component {
       username: '',
       password: '',
       password_confirmation: '',
-      team: '',
+      email: '',
 
     };
   }
@@ -47,11 +47,12 @@ export default class Register extends Component {
       <div style={{width: '50%', margin: 'auto'}}>
         <Form color='blue' onSubmit={() => onSubmit(this.state)}><Header>New Player:</Header>
           <Form.Input placeholder='Username' type='text' onChange={this.handleChange('username')}/>
+          <Form.Input placeholder='Email Address' type='email' onChange={this.handleChange('email')} />
           <Form.Group widths='equal'>
             <Form.Input placeholder='Enter Password' type='password' onChange={this.handleChange('password')} />
             <Form.Input placeholder='Confirm Password' type='password' onChange={this.handleChange('password_confirmation')} />
           </Form.Group>
-          {/*}<Form.Input placeholder='Team Name' type='text' onChange={this.handleChange('team')} /> */}
+
           <Button type="submit" color='blue'>Sign Up</Button>
         </Form>
       </div>
