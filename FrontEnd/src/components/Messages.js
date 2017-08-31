@@ -25,9 +25,7 @@ class Messages extends Component {
     message.body = messageBody;
     message.user = user;
     message.date = moment();
-    addMessage({
-      messages: R.prepend(message, messages),
-    });
+    addMessage(message);
     this.setState({messageBody: ''});
   }
 
@@ -36,9 +34,8 @@ class Messages extends Component {
   }
 
   render() {
-    const { messages, messageBody } = this.state;
-    const { user } = this.props;
-
+    const { messageBody } = this.state;
+    const { user, messages } = this.props;
     return (
       <Container>
         <Header>Messages</Header>
@@ -52,7 +49,7 @@ class Messages extends Component {
         <Feed>
           {messages.map((message, idx) => (
             <Feed.Event key={idx}>
-              <Feed.Label><Icon name='conversation' /></Feed.Label>
+              <Feed.Label><Icon name='user circle' /></Feed.Label>
               <Feed.Content date={message.date.fromNow()} summary={message.body} />
               <Feed.Meta>Posted By: <Feed.User>{message.user.username}</Feed.User></Feed.Meta>
             </Feed.Event>
@@ -78,9 +75,11 @@ const mapStateToProps = function(state) {
 }
 
 const mapDispatchToProps = function(dispatch) {
-  addMessage: function(message) {
-    dispatch(addMessage(message));
+  return {
+    addMessage: function(message) {
+      dispatch(addMessage(message));
+    }
   }
 }
 
-export default connect(mapStateToProps)(Messages);
+export default connect(mapStateToProps, mapDispatchToProps)(Messages);
