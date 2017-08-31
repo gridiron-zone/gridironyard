@@ -40,17 +40,22 @@ class App extends Component {
   render() {
     const {activeItem} = this.props;
     const Subview = appSubComponents[activeItem];
-    console.log(activeItem);
     const { user } = this.props;
     return (
       <div className="App">
-        <div className="App-header" style={{background: ` no-repeat top/cover url(${background})` }}>
+        <div className="App-header" style={{background: `no-repeat top/cover url(${background})`}}>
           <Image src={logo} onClick={this.handleItemClick} />
         </div>
         <Menu attached='top' pointing tabular color='green'>
-          <Menu.Item name='league' active={activeItem === 'league'} onClick={this.handleItemClick}>League</Menu.Item>
-          <Menu.Item name='team' active={activeItem === 'team'} onClick={this.handleItemClick}>Team</Menu.Item>
-          <Menu.Item name='players' active={activeItem === 'players'} onClick={this.handleItemClick}>Players</Menu.Item>
+          <Menu.Item name='league' active={activeItem === 'league' && user.hasOwnProperty('username')} onClick={this.handleItemClick}>
+            League
+          </Menu.Item>
+          <Menu.Item name='team' active={activeItem === 'team' && user.hasOwnProperty('username')} onClick={this.handleItemClick} disabled={!user.username}>
+            Team
+          </Menu.Item>
+          <Menu.Item name='players' active={activeItem === 'players' && user.hasOwnProperty('username')} onClick={this.handleItemClick} disabled={!user.username}>
+            Players
+          </Menu.Item>
           <Menu.Menu position='right'>
             <Menu.Item>{user.username || ''}</Menu.Item>
             <Menu.Item>
@@ -60,7 +65,7 @@ class App extends Component {
             </Menu.Item>
           </Menu.Menu>
         </Menu>
-        <Segment inverted color='green'>
+        <Segment inverted color='green' style={{height: 'calc(100vh - 240px)', overflow: 'scroll'}}>
           {user.hasOwnProperty('username') ?
             <Subview onClick={this.handleItemClick} /> :
             <Login />}

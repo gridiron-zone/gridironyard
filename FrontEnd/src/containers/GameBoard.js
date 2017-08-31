@@ -15,26 +15,31 @@ class GameBoard extends Component {
   fetchGame = (gameId) => {
     this.setState({loading: true});
     fetch(`http://www.nfl.com/liveupdate/game-center/${gameId}/${gameId}_gtd.json`)
-    .then(response => response.json())
+    .then((response) => {
+      if (response.ok) return response.json();
+      throw new Error('Something wrong with that game ID');
+    })
     .then(data => {
       this.setState({gameId, game: data[gameId], loading: false});
     })
-    .catch(error => console.log(error));
+    .catch(error => console.log(error.message));
   }
 
 
   componentDidMount() {
     const {gameId} = this.props;
-    console.log(`Fetching game details for ${gameId}...`);
     this.fetchGame(gameId);
   }
 
   render() {
     const {game, loading, gameId} = this.state;
 
-    if (game) {
+    if (game && Object.keys(game) > 0) {
       const lastDrive = game.drives[game.drives.crntdrv];
       const lastPlay = lastDrive.plays[Object.keys(lastDrive.plays).pop()];
+      const gameDate = `${gameId.slice(0,4)}-${gameId.slice(4,6)}-${gameId.slice(6,8)} GMT-0400`;
+      const gameDateObj = new Date(gameDate);
+      const options = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' };
       let downString;
       switch(game.down) {
         case '1':
@@ -81,6 +86,7 @@ class GameBoard extends Component {
           </Menu>
 
           <Container textAlign='center'>
+            <span style={{margin: '0 10px'}}>{game.stadium} &mdash; {`${gameDateObj.toLocaleString('en-US', options)}`}</span>
           <Table
             celled
             size='small'
@@ -149,9 +155,15 @@ class GameBoard extends Component {
           </Container>
         </Segment>
       )
-    } else {
+    } else if (loading) {
       return (
         <Loader active />
+      )
+    } else {
+      return (
+        <div>
+          <Header size='medium'>Check again at game time!</Header>
+        </div>
       )
     }
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Accordion } from 'semantic-ui-react';
+import { Accordion, Header } from 'semantic-ui-react';
 import NFLGameSummary from './NFLGameSummary';
 import GameBoard from './GameBoard';
 
@@ -50,7 +50,7 @@ export default class NFLScoreboard extends Component {
 
     return (
       <div>
-        <h1>NFL Games this week:</h1>
+        <Header size='large' >NFL Games this week:</Header>
           {games.map((gameId, index) =>
             (
               <Accordion key={gameId}>

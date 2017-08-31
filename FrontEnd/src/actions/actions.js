@@ -41,3 +41,10 @@ export function changeSubview(view) {
     view
   }
 }
+
+export function addMessage(message) {
+  return {
+    type: 'ADD_MESSAGE',
+    message
+  }
+}

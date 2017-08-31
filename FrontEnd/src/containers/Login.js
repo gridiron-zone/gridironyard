@@ -32,19 +32,21 @@ class Login extends Component {
     const { userId, password } = this.state;
     const { onClick } = this.props;
     return (
-      <div>
+      <div style={{height: 'calc(100vh - 250px)'}}>
         <Divider horizontal>LOG IN TO YOUR TEAM</Divider>
-        <Segment style={{margin: 'auto'}}>
-          <Form onSubmit={this.handleLogin}>
+        <Segment color='grey'>
+          <div style={{width: '100%'}}>
+          <Form style={{display: 'flex', justifyContent: 'center'}} onSubmit={this.handleLogin}>
             <Form.Group>
-              <Form.Input placeholder='User Name' name='username' type='text' value={userId} onChange={this.handleChange} />
+              <Form.Input placeholder='User Name' name='username' type='text' value={userId} onChange={this.handleChange} autoFocus/>
               <Form.Input placeholder='Password' name='password' type='password' value={password} onChange={this.handleChange} />
               <Form.Button content='Log In' />
             </Form.Group>
           </Form>
+          </div>
         </Segment>
         <Divider horizontal>OR SIGN UP</Divider>
-        <Segment style={{alignItems: 'center'}}>
+        <Segment color="blue" style={{alignItems: 'center'}}>
           <Register onSubmit={this.handleRegister}/>
         </Segment>
 
