@@ -51,7 +51,7 @@ export default class Register extends Component {
             <Form.Input placeholder='Enter Password' type='password' onChange={this.handleChange('password')} />
             <Form.Input placeholder='Confirm Password' type='password' onChange={this.handleChange('password_confirmation')} />
           </Form.Group>
-          <Form.Input placeholder='Team Name' type='text' onChange={this.handleChange('team')} />
+          {/*}<Form.Input placeholder='Team Name' type='text' onChange={this.handleChange('team')} /> */}
           <Button type="submit" color='blue'>Sign Up</Button>
         </Form>
       </div>
