@@ -6,7 +6,7 @@ import data from '../data/data';
 
 const initialPlayerState = {
   players: data.players,
-
+  currentPlayerFilter: 'OFFENSE',
   sortPlayersBy: 'rank',
   sortAscending: true
 }
@@ -14,9 +14,25 @@ const initialUserState = {
   loggedInUser: {},
   currentView: 'league',
   currentSubView: 'leaderboard',
-  currentPlayerFilter: 'OFFENSE',
   leagueId: 1,
   teamId: 1
+}
+const initialLeagueState = {
+  schedule: {},
+  currentWeek: 1,
+  messages: []
+}
+
+const leagueReducer = function(state = initialLeagueState, action) {
+  switch (action.type) {
+    case 'ADD_MESSAGE':
+      return {
+        ...state,
+        messages: R.prepend(action.message, state.messages)
+      }
+    default:
+      return state;
+  }
 }
 
 const userReducer = function(state = initialUserState, action) {
@@ -51,7 +67,6 @@ const playerReducer = function(state = initialPlayerState, action) {
         sortPlayersBy: action.sortPlayersBy,
         sortAscending: action.sortAscending
       }
-
     default:
       return state;
   }
@@ -59,7 +74,8 @@ const playerReducer = function(state = initialPlayerState, action) {
 
 const reducer = combineReducers({
   userReducer,
-  playerReducer
+  playerReducer,
+  leagueReducer
 })
 
 export default reducer;

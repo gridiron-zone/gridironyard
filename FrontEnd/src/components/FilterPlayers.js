@@ -7,7 +7,7 @@ import { filterPlayers } from '../actions/actions';
 
 class FilterPlayers extends Component {
   render() {
-
+    const {currentPlayerFilter} = this.props;
     return (
       <div className='filter-container'>
         <Dropdown placeholder='Filter by Position'
@@ -22,7 +22,7 @@ class FilterPlayers extends Component {
           header='Filter By Position'
           onChange={(event, data) => this.props.filterPlayers(data.value)}
           options={positionsObj}
-          defaultValue='OFFENSE'
+          defaultValue={currentPlayerFilter}
           style={{color: 'black'}}
         />
 
@@ -33,7 +33,7 @@ class FilterPlayers extends Component {
 }
 
 const mapStateToProps = (state) => ({
-
+  currentPlayerFilter: state.playerReducer.currentPlayerFilter
 });
 
 const mapDispatchToProps = function(dispatch) {
