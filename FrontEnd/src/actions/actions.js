@@ -27,6 +27,21 @@ export function sortPlayers(sortPlayersBy, sortAscending) {
   }
 }
 
+export function addPlayer(team, player) {
+  return {
+    type: 'ADD_PLAYER',
+    team,
+    player
+  }
+}
+
+export function dropPlayer(player) {
+  return {
+    type: 'DROP_PLAYER',
+    player
+  }
+}
+
 export function changeView(view) {
   return {
     type: 'CHANGE_VIEW',

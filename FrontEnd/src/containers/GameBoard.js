@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment, Table, Dimmer, Loader, Menu, Header, Container, Image, Feed } from 'semantic-ui-react';
+import { Segment, Dimmer, Loader, Menu, Header, Container, Image, Feed } from 'semantic-ui-react';
 
 class GameBoard extends Component {
 
@@ -41,7 +41,7 @@ class GameBoard extends Component {
   }
 
   render() {
-    const {game, loading, gameId} = this.state;
+    const {game, loading} = this.state;
 
     if (game && Object.keys(game).length > 0) {
       let lastPlay;
@@ -51,9 +51,9 @@ class GameBoard extends Component {
       } else {
         lastPlay = 'Pregame';
       }
-      const gameDate = `${gameId.slice(0,4)}-${gameId.slice(4,6)}-${gameId.slice(6,8)} GMT-0400`;
-      const gameDateObj = new Date(gameDate);
-      const options = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' };
+      // const gameDate = `${gameId.slice(0,4)}-${gameId.slice(4,6)}-${gameId.slice(6,8)} GMT-0400`;
+      // const gameDateObj = new Date(gameDate);
+      // const options = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' };
       const downString = ['', '1st', '2nd', '3rd', '4th'];
 
       return (
@@ -85,7 +85,7 @@ class GameBoard extends Component {
           </Menu>
 
           <Container textAlign='center'>
-            <Header size='small'>{game.clock}</Header>
+            <Header size='large'>{game.clock}</Header>
             <Segment vertical>
               {game.qtr && game.qtr !== 'Final' ? `${downString[game.down || 1]} & ${game.togo}, ball on ${game.yl}` : ''}
               <Header size='small'>Last Play:</Header>

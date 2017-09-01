@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Table, Transition } from 'semantic-ui-react';
+import { Button, Table, Transition, Header } from 'semantic-ui-react';
 import {schedule} from '../data/data';
 
 class Scoreboard extends Component {
@@ -53,7 +53,7 @@ class Scoreboard extends Component {
     const { week, scores } = this.state;
     return (
       <div className='scoreboard'>
-        <h1 style={{color: 'black'}}>League Name Scoreboard:</h1>
+        <Header size='large' style={{color: 'black'}}>League Name Scoreboard:</Header>
         <Button onClick={this.handleClick('dec')} size='tiny' icon='arrow left' />
         Week {week + 1}
         <Button onClick={this.handleClick('inc')} size='tiny' icon='arrow right' />

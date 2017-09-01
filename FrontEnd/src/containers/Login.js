@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, Button, Segment, Divider, Message } from 'semantic-ui-react';
+import { Form, Segment, Divider, Message } from 'semantic-ui-react';
 import R from 'ramda';
 import { loginUser } from '../actions/actions';
 import Register from './Register';
@@ -14,14 +14,14 @@ class Login extends Component {
         username: '',
         password: ''
       },
-      error: false
+      loginerror: false,
+      registererror: false
     }
   }
 
   handleChange = (e, data) => {
-    const { user } = this.state;
     this.setState(R.assocPath(['user', data.name], data.value, this.state));
-    this.setState({error: false});
+    this.setState({loginerror: false, registererror: false});
   }
 
   handleLogin = () => {
@@ -38,15 +38,15 @@ class Login extends Component {
     .then(response => response.json())
     .then(user => {
       if (!user.error) {
-        this.setState({error: false})
+        this.setState({loginerror: false})
         loginUser(user);
       } else {
-        this.setState({error: true});
+        this.setState({loginerror: true});
       }
     })
     .catch(error => {
       console.log(error);
-      this.setState({error: true});
+      this.setState({loginerror: true});
     });
   }
 
@@ -60,24 +60,31 @@ class Login extends Component {
       },
       body: JSON.stringify(form)
     })
-    .then(response => response.json())
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        this.setState({registererror: true});
+        throw new Error('Something went wrong');
+      }
+    })
     .then(data => {
-        loginUser(data);
+      if (data) loginUser(data);
       }
     )
-    .catch(error => console.log(error.json()));
+    .catch(error => console.log(error));
   }
 
   render() {
-    const { user, error } = this.state;
+    const { user, loginerror, registererror } = this.state;
     const { username, password } = user;
-    const { onClick } = this.props;
+    // const { onClick } = this.props;
     return (
       <div style={{height: 'calc(100vh - 250px)'}}>
         <Divider horizontal>LOG IN TO YOUR TEAM</Divider>
         <Segment color='grey'>
           <div style={{width: '100%'}}>
-          <Form style={{display: 'flex', flexFlow: 'row wrap', justifyContent: 'center'}} onSubmit={this.handleLogin} error={error}>
+          <Form style={{display: 'flex', flexFlow: 'row wrap', justifyContent: 'center'}} onSubmit={this.handleLogin} error={loginerror}>
             <Form.Group>
               <Form.Input placeholder='User Name' name='username' type='text' value={username} onChange={this.handleChange} autoFocus/>
               <Form.Input placeholder='Password' name='password' type='password' value={password} onChange={this.handleChange} />
@@ -86,7 +93,7 @@ class Login extends Component {
             <Message
               error
               header='Login Failed'
-              content="Username and password don't match."
+              content="Username and password don't match. If you don't have an account, create one below!"
               style={{flexGrow: '1', flexBasis: '100%'}}
             />
           </Form>
@@ -94,7 +101,7 @@ class Login extends Component {
         </Segment>
         <Divider horizontal>OR SIGN UP</Divider>
         <Segment color="blue" style={{alignItems: 'center'}}>
-          <Register onSubmit={this.handleRegister}/>
+          <Register onSubmit={this.handleRegister} error={registererror}/>
         </Segment>
 
       </div>
