@@ -69,7 +69,6 @@ class Login extends Component {
       }
     })
     .then(data => {
-      console.log(data);
       if (data) loginUser(data);
       }
     )
@@ -94,7 +93,7 @@ class Login extends Component {
             <Message
               error
               header='Login Failed'
-              content="Username and password don't match."
+              content="Username and password don't match. If you don't have an account, create one below!"
               style={{flexGrow: '1', flexBasis: '100%'}}
             />
           </Form>
