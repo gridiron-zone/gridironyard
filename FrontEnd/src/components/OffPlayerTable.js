@@ -18,7 +18,7 @@ export default class OffPlayerTable extends React.Component {
           {players.map((player, index) => (
             <Table.Row key={index}>
               {offStatCategories.map((stat, index) => (
-                <Table.Cell key={index} >{player[stat] || '-'}</Table.Cell>
+                stat === 'owner' ? <Table.Cell key={index} >{player[stat] || 'FA'}</Table.Cell> : <Table.Cell key={index} >{player[stat] || '-'}</Table.Cell>
               ))}
 
             </Table.Row>
