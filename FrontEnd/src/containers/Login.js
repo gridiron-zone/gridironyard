@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, Button, Segment, Divider } from 'semantic-ui-react';
+import { Form, Button, Segment, Divider, Message } from 'semantic-ui-react';
 import R from 'ramda';
 import { loginUser } from '../actions/actions';
 import Register from './Register';
@@ -10,30 +10,44 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: ''
+      user: {
+        username: '',
+        password: ''
+      },
+      error: false
     }
   }
 
   handleChange = (e, data) => {
-    this.setState(R.assoc(data.name, data.value, this.state));
+    const { user } = this.state;
+    this.setState(R.assocPath(['user', data.name], data.value, this.state));
   }
+
   handleLogin = () => {
     const {loginUser} = this.props;
+    const {user} = this.state;
+    console.log('Loggin in...', user);
     fetch('/users/',
     {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(user)
     })
     .then(response => response.json())
     .then(user => {
-      console.log(user);
-      loginUser(user);
+      if (!user.error) {
+        this.setState({error: false})
+        loginUser(user);
+      } else {
+        this.setState({error: true});
+      }
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+      console.log(error);
+      this.setState({error: true});
+    });
   }
 
   handleRegister = (form) => {
@@ -56,19 +70,25 @@ class Login extends Component {
   }
 
   render() {
-    const { userId, password } = this.state;
+    const { user, error } = this.state;
+    const { username, password } = user;
     const { onClick } = this.props;
     return (
       <div style={{height: 'calc(100vh - 250px)'}}>
         <Divider horizontal>LOG IN TO YOUR TEAM</Divider>
         <Segment color='grey'>
           <div style={{width: '100%'}}>
-          <Form style={{display: 'flex', justifyContent: 'center'}} onSubmit={this.handleLogin}>
+          <Form style={{display: 'flex', justifyContent: 'center'}} onSubmit={this.handleLogin} error={error}>
             <Form.Group>
-              <Form.Input placeholder='User Name' name='username' type='text' value={userId} onChange={this.handleChange} autoFocus/>
+              <Form.Input placeholder='User Name' name='username' type='text' value={username} onChange={this.handleChange} autoFocus/>
               <Form.Input placeholder='Password' name='password' type='password' value={password} onChange={this.handleChange} />
               <Form.Button content='Log In' />
             </Form.Group>
+            <Message
+              error
+              header='Login Failed'
+              content="Username and password don't match."
+            />
           </Form>
           </div>
         </Segment>
