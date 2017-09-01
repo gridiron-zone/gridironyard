@@ -4,7 +4,17 @@ import { addPlayer, dropPlayer } from '../actions/actions';
 import { Table, Icon } from 'semantic-ui-react';
 import {offStatCategories} from '../data/data';
 
+const AddDropTrade = ({team, player, add, drop}) => {
+  if (player.owner && player.owner === team)
+    return <Icon name='minus' bordered circular color='red' inverted onClick={() => drop(player)}/>
+  else if (player.owner && player.owner !== team)
+    return <Icon name='arrow up' bordered circular color='blue' inverted />
+  else
+    return <Icon name='add' bordered circular color='green' inverted onClick={() => add(team, player)}/>
+}
+
 class OffPlayerTable extends React.Component {
+
   render() {
     const {players, onClick, team, addPlayer, dropPlayer} = this.props;
     console.log(team);
@@ -22,9 +32,7 @@ class OffPlayerTable extends React.Component {
           {players.map((player, index) => (
             <Table.Row key={index}>
               <Table.Cell>
-                {player.owner ?
-                  <Icon name='minus' bordered circular color='red' inverted onClick={() => dropPlayer(player)}/> :
-                  <Icon name='add' bordered circular color='green' inverted onClick={() => addPlayer(team, player)}/>}
+                <AddDropTrade team={team} player={player} add={addPlayer} drop={dropPlayer}/>
               </Table.Cell>
               {offStatCategories.map((stat, index) => (
                 stat === 'owner' ? <Table.Cell key={index} >{player[stat] || 'FA'}</Table.Cell> : <Table.Cell key={index} >{player[stat] || '-'}</Table.Cell>
