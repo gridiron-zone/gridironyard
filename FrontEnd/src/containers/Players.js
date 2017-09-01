@@ -23,9 +23,9 @@ class Players extends Component {
   showPlayers = () => {
     const {players, currentPlayerFilter, user} = this.props;
     if (currentPlayerFilter === 'DEF') {
-      return <DefPlayerTable players={players} onClick={this.handleClick} />
+      return <DefPlayerTable players={players} onClick={this.handleClick} team={user.username}/>
     } else if (currentPlayerFilter === 'K') {
-      return <KickPlayerTable players={players} onClick={this.handleClick} />
+      return <KickPlayerTable players={players} onClick={this.handleClick} team={user.username}/>
     } else {
       return <OffPlayerTable players={players} onClick={this.handleClick} team={user.username}/>
     }
