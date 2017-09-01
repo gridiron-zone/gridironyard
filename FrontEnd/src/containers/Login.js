@@ -27,10 +27,12 @@ class Login extends Component {
   handleLogin = () => {
     const {loginUser} = this.props;
     const {user} = this.state;
-    fetch('/users/',
+    fetch('https://gridironyard-api.herokuapp.com/users/',
     {
       method: 'POST',
+      mode: 'no-cors',
       headers: {
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify(user)
@@ -52,10 +54,12 @@ class Login extends Component {
 
   handleRegister = (form) => {
     const {loginUser} = this.props;
-    fetch('/users/new/',
+    fetch('https://gridironyard-api.herokuapp.com/users/new/',
     {
       method: 'POST',
+      mode: 'no-cors',
       headers: {
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify(form)

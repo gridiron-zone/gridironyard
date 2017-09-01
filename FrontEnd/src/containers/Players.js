@@ -33,7 +33,7 @@ class Players extends Component {
 
   componentDidMount() {
     // let allPlayers = [];
-    fetch('/players_api')
+    fetch('https://gridironyard-api.herokuapp.com/players_api')
     .then(response => response.json())
     .then(data => console.log(data));
 

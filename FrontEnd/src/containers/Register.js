@@ -25,10 +25,11 @@ export default class Register extends Component {
   handleSubmit = () => {
     const form = this.state;
     console.log(form);
-    fetch('/users/new/',
+    fetch('https://gridironyard-api.herokuapp.com/users/new/',
     {
       method: 'POST',
       headers: {
+        "Accept": "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify(form)
