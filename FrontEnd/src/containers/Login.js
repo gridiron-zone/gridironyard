@@ -29,7 +29,10 @@ class Login extends Component {
       body: JSON.stringify(this.state)
     })
     .then(response => response.json())
-    .then(user => loginUser(user))
+    .then(user => {
+      console.log(user);
+      loginUser(user);
+    })
     .catch(error => console.log(error));
   }
 

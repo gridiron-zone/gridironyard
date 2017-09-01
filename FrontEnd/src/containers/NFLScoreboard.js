@@ -61,7 +61,10 @@ export default class NFLScoreboard extends Component {
                   onClick={this.selectGame}/>
                 </Accordion.Title>
                 <Accordion.Content>
-                  <GameBoard gameId={gameId} />
+                  {gameId === this.state.selectedGame ?
+                    <GameBoard gameId={gameId} /> :
+                    <div></div>
+                  }
                 </Accordion.Content>
               </Accordion>
             )
