@@ -28,7 +28,7 @@ class Team extends Component {
           <Menu.Item name='roster' active={activeItem === 'roster'} onClick={this.handleItemClick}  />
           <Menu.Item name='matchup' active={activeItem === 'matchup'} onClick={this.handleItemClick}  />
         </Menu>
-        <Container style={{paddingBottom: '25px'}}>
+        <Container style={{width: '100%', paddingBottom: '25px'}}>
           {Subview}
         </Container>
       </div>

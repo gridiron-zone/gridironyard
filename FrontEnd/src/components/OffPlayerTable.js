@@ -23,8 +23,8 @@ class OffPlayerTable extends React.Component {
             <Table.Row key={index}>
               <Table.Cell>
                 {player.owner ?
-                  <Icon name='minus' bordered circular color='black' inverted onClick={() => dropPlayer(player)}/> :
-                  <Icon name='add' bordered circular color='black' inverted onClick={() => addPlayer(team, player)}/>}
+                  <Icon name='minus' bordered circular color='red' inverted onClick={() => dropPlayer(player)}/> :
+                  <Icon name='add' bordered circular color='green' inverted onClick={() => addPlayer(team, player)}/>}
               </Table.Cell>
               {offStatCategories.map((stat, index) => (
                 stat === 'owner' ? <Table.Cell key={index} >{player[stat] || 'FA'}</Table.Cell> : <Table.Cell key={index} >{player[stat] || '-'}</Table.Cell>
