@@ -67,6 +67,22 @@ const playerReducer = function(state = initialPlayerState, action) {
         sortPlayersBy: action.sortPlayersBy,
         sortAscending: action.sortAscending
       }
+    case 'ADD_PLAYER':
+      let playerAdd = R.find(R.propEq('name', action.player.name))(state.players);
+      let playerAddIdx = R.findIndex(R.propEq('name', action.player.name))(state.players);
+      playerAdd.owner = action.team;
+      return {
+        ...state,
+        players: R.update(playerAddIdx)(playerAdd)(state.players)
+      }
+    case 'DROP_PLAYER':
+      let playerDropIdx = R.findIndex(R.propEq('name', action.player.name))(state.players);
+      let playerDrop = R.find(R.propEq('name', action.player.name))(state.players);
+      playerDrop.owner = null;
+      return {
+        ...state,
+        players: R.update(playerDropIdx)(playerDrop)(state.players)
+      }
     default:
       return state;
   }

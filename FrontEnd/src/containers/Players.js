@@ -4,7 +4,7 @@ import FilterPlayers from '../components/FilterPlayers';
 import OffPlayerTable from '../components/OffPlayerTable';
 import DefPlayerTable from '../components/DefPlayerTable';
 import KickPlayerTable from '../components/KickPlayerTable';
-import {sortPlayers} from '../actions/actions';
+import {sortPlayers, addPlayer, dropPlayer} from '../actions/actions';
 
 // import { playerScraper } from '../data/scraper';
 
@@ -21,13 +21,13 @@ class Players extends Component {
   }
 
   showPlayers = () => {
-    const {players, currentPlayerFilter} = this.props;
+    const {players, currentPlayerFilter, user} = this.props;
     if (currentPlayerFilter === 'DEF') {
       return <DefPlayerTable players={players} onClick={this.handleClick} />
     } else if (currentPlayerFilter === 'K') {
       return <KickPlayerTable players={players} onClick={this.handleClick} />
     } else {
-      return <OffPlayerTable players={players} onClick={this.handleClick}/>
+      return <OffPlayerTable players={players} onClick={this.handleClick} team={user.username}/>
     }
   }
 
@@ -72,6 +72,7 @@ const mapStateToProps = function(state) {
   const flexPositions = ['WR', 'RB', 'TE'];
   const offensePositions = ['QB', 'RB', 'WR', 'TE'];
   const {currentPlayerFilter, sortPlayersBy, sortAscending} = state.playerReducer;
+  const {loggedInUser} = state.userReducer;
   switch (currentPlayerFilter) {
     case 'QB':
     case 'RB':
@@ -91,7 +92,7 @@ const mapStateToProps = function(state) {
       players = state.playerReducer.players.map(player => player);
   }
 
-  return {players, currentPlayerFilter, sortPlayersBy, sortAscending};
+  return {players, currentPlayerFilter, sortPlayersBy, sortAscending, user: loggedInUser};
 }
 
 
@@ -100,6 +101,12 @@ const mapDispatchToProps = function(dispatch) {
   return {
     sortPlayers: function(sortBy, sortAscending) {
       dispatch(sortPlayers(sortBy, sortAscending));
+    },
+    addPlayer: function(team, player) {
+      dispatch(addPlayer(team, player));
+    },
+    dropPlayer: function(player) {
+      dispatch(dropPlayer(player));
     }
   }
 }

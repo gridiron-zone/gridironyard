@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import R from 'ramda';
-import { Header, Container, Segment, Icon, Feed, Form, TextArea, Button } from 'semantic-ui-react';
+import { Header, Container, Icon, Feed, Form, TextArea } from 'semantic-ui-react';
 import moment from 'moment';
 import { addMessage } from '../actions/actions';
 
@@ -19,7 +18,7 @@ class Messages extends Component {
   }
 
   handleSubmit = () => {
-    const { user, addMessage, messages } = this.props;
+    const { user, addMessage } = this.props;
     const {messageBody} = this.state;
     const message = {};
     message.body = messageBody;
