@@ -21,12 +21,12 @@ class Login extends Component {
   handleChange = (e, data) => {
     const { user } = this.state;
     this.setState(R.assocPath(['user', data.name], data.value, this.state));
+    this.setState({error: false});
   }
 
   handleLogin = () => {
     const {loginUser} = this.props;
     const {user} = this.state;
-    console.log('Loggin in...', user);
     fetch('/users/',
     {
       method: 'POST',
@@ -62,7 +62,6 @@ class Login extends Component {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         loginUser(data);
       }
     )
@@ -78,7 +77,7 @@ class Login extends Component {
         <Divider horizontal>LOG IN TO YOUR TEAM</Divider>
         <Segment color='grey'>
           <div style={{width: '100%'}}>
-          <Form style={{display: 'flex', justifyContent: 'center'}} onSubmit={this.handleLogin} error={error}>
+          <Form style={{display: 'flex', flexFlow: 'row wrap', justifyContent: 'center'}} onSubmit={this.handleLogin} error={error}>
             <Form.Group>
               <Form.Input placeholder='User Name' name='username' type='text' value={username} onChange={this.handleChange} autoFocus/>
               <Form.Input placeholder='Password' name='password' type='password' value={password} onChange={this.handleChange} />
@@ -88,6 +87,7 @@ class Login extends Component {
               error
               header='Login Failed'
               content="Username and password don't match."
+              style={{flexGrow: '1', flexBasis: '100%'}}
             />
           </Form>
           </div>

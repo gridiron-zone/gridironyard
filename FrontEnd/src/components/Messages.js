@@ -30,7 +30,7 @@ class Messages extends Component {
   }
 
   componentDidMount () {
-
+    // here, fetch the messages from the server
   }
 
   render() {
